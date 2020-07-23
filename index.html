@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="minusBtn1" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="input1" type="text" class="form-control text-center" value="1">
-                           <button id="plusBtn1" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="phnMinus" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="phnInput" type="text" class="form-control text-center" value="1">
+                           <button id="phnPlus" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="currentPrice1">1219</span></h5>
+                        <h5>$ <span id="phonePrice">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="minusBtn2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="caseMinus" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="input2" type="text" class="form-control text-center" value="1">
-                           <button id="plusBtn2" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="casePlus" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$ <span id="currentPrice2">59</span></h5>
+                        <h5>$ <span id="casePrice">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -78,13 +78,13 @@
       </div>
    </section>
    <section>
-         <!-- const updatePrice = document.getElementById("currentPrice1").innerText;
+         <!-- const updatePrice = document.getElementById("phonePrice").innerText;
          var totalPhnPrice = 1219 * increaseItem;
-         document.getElementById("currentPrice1").innerText = totalPhnPrice;
+         document.getElementById("phonePrice").innerText = totalPhnPrice;
 
-         const updateMinusPrice = document.getElementById("currentPrice1").innerText;
+         const updateMinusPrice = document.getElementById("phonePrice").innerText;
          var totalPhnPrice = 1219 * decreaseItem;
-         document.getElementById("currentPrice1").innerText = totalPhnPrice;
+         document.getElementById("phonePrice").innerText = totalPhnPrice;
 
          var subTotal = document.getElementById("subtotal").innerText;
          subTotal = parseInt(subTotal);
@@ -111,27 +111,27 @@
          const updateTotal = totalPhnPrice + updateTax;
          document.getElementById("total").innerText = updateTotal;
 
-         const updatePrice = document.getElementById("currentPrice2").innerText;
+         const updatePrice = document.getElementById("casePrice").innerText;
             var totalCoverPrice = 59 * increaseItem;
-            document.getElementById("currentPrice2").innerText = totalCoverPrice;
+            document.getElementById("casePrice").innerText = totalCoverPrice;
 
-         const updatePrice = document.getElementById("currentPrice2").innerText;
+         const updatePrice = document.getElementById("casePrice").innerText;
             var totalPrice = 59 * deicreaseItem;
-            document.getElementById("currentPrice2").innerText = totalPrice;
+            document.getElementById("casePrice").innerText = totalPrice;
       
       -->
    </section>
 
    <script>
       //iPhone plus button event handler
-      const addItem = document.getElementById("plusBtn1");
+      const addItem = document.getElementById("phnPlus");
       addItem.addEventListener("click", function(){
-         const currentItem = document.getElementById("input1").value;
+         const currentItem = document.getElementById("phnInput").value;
          const currentItemNum = parseInt(currentItem);
          const increaseItem = currentItemNum + 1;
-         document.getElementById("input1").value = increaseItem;
+         document.getElementById("phnInput").value = increaseItem;
 
-         const totalPhnPrice = getupdatePrice("currentPrice1", increaseItem);
+         const totalPhnPrice = getupdatePrice("phonePrice", increaseItem);
          const subTotal = getsubtotal("subtotal", totalPhnPrice);
          const updateTax = gettax("tax", increaseItem);
          const updateTotal = getTotal("total", totalPhnPrice, updateTax);
@@ -140,14 +140,14 @@
 
 
       // iphone minus button event handler
-      const minusItem = document.getElementById("minusBtn1");
+      const minusItem = document.getElementById("phnMinus");
       minusItem.addEventListener("click", function(){
-         const currentMinusItem = document.getElementById("input1").value;
+         const currentMinusItem = document.getElementById("phnInput").value;
          const currentMinusNum = parseInt(currentMinusItem);
          const decreaseItem = currentMinusNum - 1;
-         document.getElementById("input1").value = decreaseItem;
+         document.getElementById("phnInput").value = decreaseItem;
 
-         const totalPhnPrice = getupdatePrice("currentPrice1", decreaseItem);
+         const totalPhnPrice = getupdatePrice("phonePrice", decreaseItem);
          const subTotal = getsubtotal("subtotal", totalPhnPrice);
          const updateTax = gettax("tax", decreaseItem);
          const updateTotal = getTotal("total", totalPhnPrice, updateTax);
@@ -158,7 +158,7 @@
       function getupdatePrice(id, ici){
          const updateMinusPrice = document.getElementById(id).innerText;
          var totalPhnPrice = 1219 * ici;
-         document.getElementById("currentPrice1").innerText = totalPhnPrice;
+         document.getElementById("phonePrice").innerText = totalPhnPrice;
          return totalPhnPrice;
       }
 
@@ -187,27 +187,27 @@
 
 
       // Cover plus button event handler
-         const addCoverItem = document.getElementById("plusBtn2");
+         const addCoverItem = document.getElementById("casePlus");
          addCoverItem.addEventListener("click", function(){
             const currentItem = document.getElementById("input2").value;
             const currentItemNum = parseInt(currentItem);
             const increaseItem = currentItemNum + 1;
             document.getElementById("input2").value = increaseItem;
 
-            const totalCasePrice = getCaseTotalPrice("currentPrice2", increaseItem);
+            const totalCasePrice = getCaseTotalPrice("casePrice", increaseItem);
             const Total = getCaseAndPhnTotal("subtotal", totalCasePrice, totalPhnPrice)
 
          });
 
       // Cover minus button event handler
-         const minusCoverItem = document.getElementById("minusBtn2");
+         const minusCoverItem = document.getElementById("caseMinus");
          minusCoverItem.addEventListener("click", function(){
             const currentMinusItem = document.getElementById("input2").value;
             const currentMinusItemNum = parseInt(currentMinusItem);
             const deicreaseItem = currentMinusItemNum - 1;
             document.getElementById("input2").value = deicreaseItem;
       
-            const totalCasePrice = getCaseTotalPrice("currentPrice2", deicreaseItem);
+            const totalCasePrice = getCaseTotalPrice("casePrice", deicreaseItem);
             const Total = getCaseAndPhnTotal("subtotal", totalCasePrice, totalPhnPrice)
       })
 
