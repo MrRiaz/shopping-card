@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$ <span id="subtotal">1,278</span></h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$<span id="subtotal">1,278</span></h5>
+                        <h5>$<span id="tax" >2</span></h5>
+                        <h5>$<span id="total">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -77,36 +77,10 @@
          </div>
       </div>
    </section>
-
-   <script>
-      //iPhone plus button event handler
-      const addItem = document.getElementById("plusBtn1");
-      addItem.addEventListener("click", function(){
-         const currentItem = document.getElementById("input1").value;
-         const currentItemNum = parseInt(currentItem);
-         const increaseItem = currentItemNum + 1;
-
-         document.getElementById("input1").value = increaseItem;
-
-         const updatePrice = document.getElementById("currentPrice1").innerText;
+   <section>
+         <!-- const updatePrice = document.getElementById("currentPrice1").innerText;
          var totalPhnPrice = 1219 * increaseItem;
          document.getElementById("currentPrice1").innerText = totalPhnPrice;
-
-         var subTotal = document.getElementById("subtotal").innerText;
-         subTotal = parseInt(subTotal);
-         document.getElementById("subtotal").innerText = totalPhnPrice;
-
-      })
-
-      // iphone minus button event handler
-      const minusItem = document.getElementById("minusBtn1");
-      minusItem.addEventListener("click", function(){
-
-         const currentMinusItem = document.getElementById("input1").value;
-         const currentMinusNum = parseInt(currentMinusItem);
-         const decreaseItem = currentMinusNum - 1;
-
-         document.getElementById("input1").value = decreaseItem;
 
          const updateMinusPrice = document.getElementById("currentPrice1").innerText;
          var totalPhnPrice = 1219 * decreaseItem;
@@ -115,7 +89,102 @@
          var subTotal = document.getElementById("subtotal").innerText;
          subTotal = parseInt(subTotal);
          document.getElementById("subtotal").innerText = totalPhnPrice;
+
+         var subTotal = document.getElementById("subtotal").innerText;
+         subTotal = parseInt(subTotal);
+         document.getElementById("subtotal").innerText = totalPhnPrice;
+
+         const tax = document.getElementById("tax").innerText;
+         const updateTax = 2 * increaseItem;
+         document.getElementById("tax").innerText = updateTax;
+
+
+         const tax = document.getElementById("tax").innerText;
+         const updateTax = 2 * decreaseItem;
+         document.getElementById("tax").innerText = updateTax;
+
+         const total = document.getElementById("total").innerText;
+         const updateTotal = totalPhnPrice + updateTax;
+         document.getElementById("total").innerText = updateTotal;
+
+         const total = document.getElementById("total").innerText;
+         const updateTotal = totalPhnPrice + updateTax;
+         document.getElementById("total").innerText = updateTotal;
+
+         const updatePrice = document.getElementById("currentPrice2").innerText;
+            var totalCoverPrice = 59 * increaseItem;
+            document.getElementById("currentPrice2").innerText = totalCoverPrice;
+
+         const updatePrice = document.getElementById("currentPrice2").innerText;
+            var totalPrice = 59 * deicreaseItem;
+            document.getElementById("currentPrice2").innerText = totalPrice;
+      
+      -->
+   </section>
+
+   <script>
+      //iPhone plus button event handler
+      const addItem = document.getElementById("plusBtn1");
+      addItem.addEventListener("click", function(){
+         const currentItem = document.getElementById("input1").value;
+         const currentItemNum = parseInt(currentItem);
+         const increaseItem = currentItemNum + 1;
+         document.getElementById("input1").value = increaseItem;
+
+         const totalPhnPrice = getupdatePrice("currentPrice1", increaseItem);
+         const subTotal = getsubtotal("subtotal", totalPhnPrice);
+         const updateTax = gettax("tax", increaseItem);
+         const updateTotal = getTotal("total", totalPhnPrice, updateTax);
+         
       });
+
+
+      // iphone minus button event handler
+      const minusItem = document.getElementById("minusBtn1");
+      minusItem.addEventListener("click", function(){
+         const currentMinusItem = document.getElementById("input1").value;
+         const currentMinusNum = parseInt(currentMinusItem);
+         const decreaseItem = currentMinusNum - 1;
+         document.getElementById("input1").value = decreaseItem;
+
+         const totalPhnPrice = getupdatePrice("currentPrice1", decreaseItem);
+         const subTotal = getsubtotal("subtotal", totalPhnPrice);
+         const updateTax = gettax("tax", decreaseItem);
+         const updateTotal = getTotal("total", totalPhnPrice, updateTax);
+
+      })
+
+      //function for phn plus button
+      function getupdatePrice(id, ici){
+         const updateMinusPrice = document.getElementById(id).innerText;
+         var totalPhnPrice = 1219 * ici;
+         document.getElementById("currentPrice1").innerText = totalPhnPrice;
+         return totalPhnPrice;
+      }
+
+      //function for phn subtotal price
+      function getsubtotal(id, TPrice){
+         var subTotal = document.getElementById(id).innerText;
+         subTotal = parseInt(subTotal);
+         document.getElementById("subtotal").innerText = TPrice;
+      }
+
+      //function for phn tax
+      function gettax(id, ici){
+         const tax = document.getElementById(id).innerText;
+         const updateTax = 2 * ici;
+         document.getElementById("tax").innerText = updateTax;
+         return updateTax;
+      }
+
+      //function for total
+      function getTotal(id, TPP, UT){
+         const total = document.getElementById("total").innerText;
+         const updateTotal = TPP + UT;
+         document.getElementById("total").innerText = updateTotal;
+         return updateTotal;
+      }
+
 
       // Cover plus button event handler
          const addCoverItem = document.getElementById("plusBtn2");
@@ -125,39 +194,39 @@
             const increaseItem = currentItemNum + 1;
             document.getElementById("input2").value = increaseItem;
 
-            const updatePrice = document.getElementById("currentPrice2").innerText;
-            var totalCoverPrice = 59 * increaseItem;
-            document.getElementById("currentPrice2").innerText = totalCoverPrice;
-
-            var subTotal = document.getElementById("subtotal").innerText;
-            subTotal = parseInt(subTotal);
-            document.getElementById("subtotal").innerText = totalCoverPrice + totalPhnPrice;
+            const totalCasePrice = getCaseTotalPrice("currentPrice2", increaseItem);
+            const Total = getCaseAndPhnTotal("subtotal", totalCasePrice, totalPhnPrice)
 
          });
 
-         // // Cover minus button event handler
-         // const addCoverItem = document.getElementById("minusBtn2");
-         // addCoverItem.addEventListener("click", function(){
-         //    const currentItem = document.getElementById("input2").value;
-         //    const currentItemNum = parseInt(currentItem);
-         //    const newItem = currentItemNum - 1;
-         //    document.getElementById("input2").value = newItem;
+      // Cover minus button event handler
+         const minusCoverItem = document.getElementById("minusBtn2");
+         minusCoverItem.addEventListener("click", function(){
+            const currentMinusItem = document.getElementById("input2").value;
+            const currentMinusItemNum = parseInt(currentMinusItem);
+            const deicreaseItem = currentMinusItemNum - 1;
+            document.getElementById("input2").value = deicreaseItem;
+      
+            const totalCasePrice = getCaseTotalPrice("currentPrice2", deicreaseItem);
+            const Total = getCaseAndPhnTotal("subtotal", totalCasePrice, totalPhnPrice)
+      })
 
-         //    const updatePrice = document.getElementById("currentPrice2").innerText;
-         //    var updatePriceNum = parseInt(updatePrice);
-         //    var totalPrice = 59 * newItem;
+      //function for total case price
+         function getCaseTotalPrice(id, Item){
+            const updatePrice = document.getElementById(id).innerText;
+            var totalCasePrice = 59 * Item;
+            document.getElementById(id).innerText = totalCasePrice;
+            return totalCasePrice;
+         }
 
-         //    document.getElementById("currentPrice2").innerText = totalPrice;
-
-         //    var subTotal = document.getElementById("subtotal").innerText;
-         //    subTotal = parseInt(subTotal);
-         //    document.getElementById("subtotal").innerText = totalPrice + totalPhnPrice;
-
-         // })
-
-
+      //function for Total
+         function getCaseAndPhnTotal(id, TCP, TPP){
+            var subTotal = document.getElementById(id).innerText;
+            subTotal = parseInt(subTotal);
+            document.getElementById(id).innerText = TCP + TPP;
+         }
 
    </script>
 </body>
-
+         
 </html>
