@@ -44,7 +44,7 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="caseMinus" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="input2" type="text" class="form-control text-center" value="1">
+                           <input id="caseInput" type="text" class="form-control text-center" value="1">
                            <button id="casePlus" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
@@ -126,27 +126,21 @@
       //iPhone plus button event handler
       const addItem = document.getElementById("phnPlus");
       addItem.addEventListener("click", function(){
-         const currentItem = document.getElementById("phnInput").value;
-         const currentItemNum = parseInt(currentItem);
-         const increaseItem = currentItemNum + 1;
-         document.getElementById("phnInput").value = increaseItem;
 
+         const increaseItem = getpositiveQuantity("phnInput");
          const totalPhnPrice = getupdatePrice("phonePrice", increaseItem);
          const subTotal = getsubtotal("subtotal", totalPhnPrice);
          const updateTax = gettax("tax", increaseItem);
          const updateTotal = getTotal("total", totalPhnPrice, updateTax);
          
-      });
+      })
 
 
       // iphone minus button event handler
       const minusItem = document.getElementById("phnMinus");
       minusItem.addEventListener("click", function(){
-         const currentMinusItem = document.getElementById("phnInput").value;
-         const currentMinusNum = parseInt(currentMinusItem);
-         const decreaseItem = currentMinusNum - 1;
-         document.getElementById("phnInput").value = decreaseItem;
 
+         const decreaseItem = getNegativeQuantity("phnInput");
          const totalPhnPrice = getupdatePrice("phonePrice", decreaseItem);
          const subTotal = getsubtotal("subtotal", totalPhnPrice);
          const updateTax = gettax("tax", decreaseItem);
@@ -154,11 +148,29 @@
 
       })
 
-      //function for phn plus button
+      //function for all positive quantity
+      function getpositiveQuantity(id){
+         const currentItem = document.getElementById(id).value;
+         const currentItemNum = parseInt(currentItem);
+         const increaseItem = currentItemNum + 1;
+         document.getElementById(id).value = increaseItem;
+         return increaseItem;
+      }
+
+      //function for all negative quantity
+      function getNegativeQuantity(id){
+         const currentMinusItem = document.getElementById(id).value;
+         const currentMinusNum = parseInt(currentMinusItem);
+         const decreaseItem = currentMinusNum - 1;
+         document.getElementById(id).value = decreaseItem;
+         return decreaseItem;
+      }
+
+      //function for phn price
       function getupdatePrice(id, ici){
          const updateMinusPrice = document.getElementById(id).innerText;
          var totalPhnPrice = 1219 * ici;
-         document.getElementById("phonePrice").innerText = totalPhnPrice;
+         document.getElementById(id).innerText = totalPhnPrice;
          return totalPhnPrice;
       }
 
@@ -166,22 +178,22 @@
       function getsubtotal(id, TPrice){
          var subTotal = document.getElementById(id).innerText;
          subTotal = parseInt(subTotal);
-         document.getElementById("subtotal").innerText = TPrice;
+         document.getElementById(id).innerText = TPrice;
       }
 
       //function for phn tax
       function gettax(id, ici){
          const tax = document.getElementById(id).innerText;
          const updateTax = 2 * ici;
-         document.getElementById("tax").innerText = updateTax;
+         document.getElementById(id).innerText = updateTax;
          return updateTax;
       }
 
-      //function for total
+      //function for phn total
       function getTotal(id, TPP, UT){
-         const total = document.getElementById("total").innerText;
+         const total = document.getElementById(id).innerText;
          const updateTotal = TPP + UT;
-         document.getElementById("total").innerText = updateTotal;
+         document.getElementById(id).innerText = updateTotal;
          return updateTotal;
       }
 
@@ -189,30 +201,24 @@
       // Cover plus button event handler
          const addCoverItem = document.getElementById("casePlus");
          addCoverItem.addEventListener("click", function(){
-            const currentItem = document.getElementById("input2").value;
-            const currentItemNum = parseInt(currentItem);
-            const increaseItem = currentItemNum + 1;
-            document.getElementById("input2").value = increaseItem;
 
+            const increaseItem = getpositiveQuantity("caseInput");
             const totalCasePrice = getCaseTotalPrice("casePrice", increaseItem);
             const Total = getCaseAndPhnTotal("subtotal", totalCasePrice, totalPhnPrice)
 
-         });
+         })
 
       // Cover minus button event handler
          const minusCoverItem = document.getElementById("caseMinus");
          minusCoverItem.addEventListener("click", function(){
-            const currentMinusItem = document.getElementById("input2").value;
-            const currentMinusItemNum = parseInt(currentMinusItem);
-            const deicreaseItem = currentMinusItemNum - 1;
-            document.getElementById("input2").value = deicreaseItem;
-      
-            const totalCasePrice = getCaseTotalPrice("casePrice", deicreaseItem);
+
+            const decreaseItem = getNegativeQuantity("caseInput");
+            const totalCasePrice = getCaseTotalPrice("casePrice", decreaseItem);
             const Total = getCaseAndPhnTotal("subtotal", totalCasePrice, totalPhnPrice)
       })
 
       //function for total case price
-         function getCaseTotalPrice(id, Item){
+         function getCaseTotalPrice(id, Item, getCaseAndPhnTotal){
             const updatePrice = document.getElementById(id).innerText;
             var totalCasePrice = 59 * Item;
             document.getElementById(id).innerText = totalCasePrice;
