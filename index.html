@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$<span id="subtotal">1,278</span></h5>
+                        <h5>$<span id="subtotal">1278</span></h5>
                         <h5>$<span id="tax" >2</span></h5>
-                        <h5>$<span id="total">1,278</span></h5>
+                        <h5>$<span id="total">1278</span></h5>
                      </div>
                   </div>
                </div>
@@ -126,27 +126,21 @@
       //iPhone plus button event handler
       const addItem = document.getElementById("phnPlus");
       addItem.addEventListener("click", function(){
+      const increaseItem = getpositiveQuantity('phnInput');
+      const totalPhnPrice = getupdatePrice("phonePrice", increaseItem);
 
-         const increaseItem = getpositiveQuantity("phnInput");
-         const totalPhnPrice = getupdatePrice("phonePrice", increaseItem);
-         const subTotal = getsubtotal("subtotal", totalPhnPrice);
-         const updateTax = gettax("tax", increaseItem);
-         const updateTotal = getTotal("total", totalPhnPrice, updateTax);
+         getSubtotal();
          
-      })
-
+   });
 
       // iphone minus button event handler
       const minusItem = document.getElementById("phnMinus");
       minusItem.addEventListener("click", function(){
+      const decreaseItem = getNegativeQuantity("phnInput");
+      const totalPhnPrice = getupdatePrice("phonePrice", decreaseItem);
 
-         const decreaseItem = getNegativeQuantity("phnInput");
-         const totalPhnPrice = getupdatePrice("phonePrice", decreaseItem);
-         const subTotal = getsubtotal("subtotal", totalPhnPrice);
-         const updateTax = gettax("tax", decreaseItem);
-         const updateTotal = getTotal("total", totalPhnPrice, updateTax);
-
-      })
+         getSubtotal();
+   });
 
       //function for all positive quantity
       function getpositiveQuantity(id){
@@ -169,69 +163,51 @@
       //function for phn price
       function getupdatePrice(id, ici){
          const updateMinusPrice = document.getElementById(id).innerText;
-         var totalPhnPrice = 1219 * ici;
+         const totalPhnPrice = 1219 * ici;
          document.getElementById(id).innerText = totalPhnPrice;
          return totalPhnPrice;
       }
 
-      //function for phn subtotal price
-      function getsubtotal(id, TPrice){
-         var subTotal = document.getElementById(id).innerText;
-         subTotal = parseInt(subTotal);
-         document.getElementById(id).innerText = TPrice;
-      }
-
-      //function for phn tax
-      function gettax(id, ici){
-         const tax = document.getElementById(id).innerText;
-         const updateTax = 2 * ici;
-         document.getElementById(id).innerText = updateTax;
-         return updateTax;
-      }
-
-      //function for phn total
-      function getTotal(id, TPP, UT){
-         const total = document.getElementById(id).innerText;
-         const updateTotal = TPP + UT;
-         document.getElementById(id).innerText = updateTotal;
-         return updateTotal;
-      }
-
 
       // Cover plus button event handler
-         const addCoverItem = document.getElementById("casePlus");
-         addCoverItem.addEventListener("click", function(){
+      const addCoverItem = document.getElementById("casePlus");
+      addCoverItem.addEventListener("click", function(){
+      const increaseItem = getpositiveQuantity("caseInput");
+      const totalCasePrice = getCaseTotalPrice("casePrice", increaseItem);
 
-            const increaseItem = getpositiveQuantity("caseInput");
-            const totalCasePrice = getCaseTotalPrice("casePrice", increaseItem);
-            const Total = getCaseAndPhnTotal("subtotal", totalCasePrice, totalPhnPrice)
+         getSubtotal();
 
-         })
+   });
 
       // Cover minus button event handler
-         const minusCoverItem = document.getElementById("caseMinus");
-         minusCoverItem.addEventListener("click", function(){
+      const minusCoverItem = document.getElementById("caseMinus");
+      minusCoverItem.addEventListener("click", function(){
+      const decreaseItem = getNegativeQuantity("caseInput");
+      const totalCasePrice = getCaseTotalPrice("casePrice", decreaseItem);
+      // phonePrice = parseFloat(document.getElementById('phonePrice').innerText);
 
-            const decreaseItem = getNegativeQuantity("caseInput");
-            const totalCasePrice = getCaseTotalPrice("casePrice", decreaseItem);
-            const Total = getCaseAndPhnTotal("subtotal", totalCasePrice, totalPhnPrice)
-      })
+         getSubtotal();
+   });
 
-      //function for total case price
-         function getCaseTotalPrice(id, Item, getCaseAndPhnTotal){
-            const updatePrice = document.getElementById(id).innerText;
-            var totalCasePrice = 59 * Item;
-            document.getElementById(id).innerText = totalCasePrice;
-            return totalCasePrice;
-         }
+   //function for total case price
+      function getCaseTotalPrice(id, Item, getCaseAndPhnTotal){
+         const updatePrice = document.getElementById(id).innerText;
+         const totalCasePrice = 59 * Item;
+         document.getElementById(id).innerText = totalCasePrice;
+         return totalCasePrice;
+      }
+   
+   //function for subtotal & total price
+      function getSubtotal(){
+        var phonePrice = document.getElementById('phonePrice').innerText;
+        var casePrice = document.getElementById('casePrice').innerText;
+        var tax = document.getElementById('tax').innerText;
+      //   console.log('phonePrice', phonePrice);
+      //   console.log('casePrice', casePrice);
+        document.getElementById('subtotal').innerText = parseFloat(phonePrice) + parseFloat(casePrice);
+        document.getElementById('total').innerText = parseFloat(phonePrice) + parseFloat(casePrice) + parseFloat(tax);
 
-      //function for Total
-         function getCaseAndPhnTotal(id, TCP, TPP){
-            var subTotal = document.getElementById(id).innerText;
-            subTotal = parseInt(subTotal);
-            document.getElementById(id).innerText = TCP + TPP;
-         }
-
+      }
    </script>
 </body>
          
